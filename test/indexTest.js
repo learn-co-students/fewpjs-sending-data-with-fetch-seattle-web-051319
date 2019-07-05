@@ -53,39 +53,7 @@ describe( "submitData()", () => {
       .to.eq( "steve@steve.com" )
   } )
 
-  it( "handles the POST request response, retrieves the new id value and appends it to the DOM", async function () {
-    nock( 'http://localhost:3000' )
-      .post( '/users' )
-      .reply( 201, function ( uri, requestBody ) {
-        return {
-          id: rando,
-          ...requestBody
-        }
-      } );
+  
 
-    let name = "Sam"
-    let email = "sam@sam.com"
-
-    await submitData( name, email )
-
-    expect( document.body.innerHTML )
-      .to.include( rando )
-  } );
-
-  it( "handles a failed POST request using catch, appends the error message to the DOM", async function () {
-    let message = 'Unauthorized Access'
-    nock( 'http://localhost:3000' )
-      .post( '/users' )
-      .replyWithError( {
-        message: message,
-        code: '401',
-      } )
-
-    let name = "Jim"
-    let email = "jim@jim.com"
-
-    await submitData( name, email )
-    expect( document.body.innerHTML )
-      .to.include( message )
-  } )
+  
 } )
